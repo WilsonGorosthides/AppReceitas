@@ -10,8 +10,8 @@
         android:id="@+id/btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="304dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="300dp"
         android:text="Registrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,17 +40,20 @@
         android:id="@+id/txt_title"
         android:layout_width="197dp"
         android:layout_height="77dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="93dp"
         android:text="@string/app_name"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="121dp"
-        tools:layout_editor_absoluteY="107dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="125dp"
         android:layout_height="109dp"
-        app:srcCompat="@drawable/logoapp"
-        tools:layout_editor_absoluteX="143dp"
-        tools:layout_editor_absoluteY="-3dp" />
+        android:layout_marginEnd="140dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logoapp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

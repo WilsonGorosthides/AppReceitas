@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
                 abrirLoginUserActivity();
             }
         });
+        btn_offline =
+                findViewById(R.id.btn_offline);
         btn_offline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { abrirExplorarReceitasActivity(); }
