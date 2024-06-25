@@ -1,8 +1,10 @@
-package com.example.appreceitas;
+package com.example.appreceitas.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.appreceitas.R;
 
 public class MainActivity extends AppCompatActivity {
 
