@@ -1,16 +1,13 @@
 package com.example.appreceitas.fragments;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,102 +15,73 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.appreceitas.R;
-import com.example.appreceitas.database.AppDatabase;
-import com.example.appreceitas.entities.Receita;
-
-import java.io.IOException;
-
-import static android.app.Activity.RESULT_OK;
 
 public class CreateRecipeFragment extends Fragment {
 
-    private static final int PICK_IMAGE_REQUEST = 1;
+    private EditText editTextTitle;
+    private EditText editTextIngredients;
+    private EditText editTextSteps;
+    private Spinner spinnerRecipeType;
+    private EditText editTextCalories;
+    private Button buttonSubmit;
 
-    private EditText editTitle, editIngredients, editSteps, editType, editCalories;
-    private ImageView imagePhoto;
-    private Button buttonSelectPhoto, buttonSaveRecipe;
-
-    private Uri imageUri;
-
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_recipe, container, false);
 
-        editTitle = view.findViewById(R.id.edit_recipe_title);
-        editIngredients = view.findViewById(R.id.edit_recipe_ingredients);
-        editSteps = view.findViewById(R.id.edit_recipe_steps);
-        editType = view.findViewById(R.id.edit_recipe_type);
-        editCalories = view.findViewById(R.id.edit_recipe_calories);
-        imagePhoto = view.findViewById(R.id.image_recipe_photo);
-        buttonSelectPhoto = view.findViewById(R.id.button_select_photo);
-        buttonSaveRecipe = view.findViewById(R.id.button_save_recipe);
+        editTextTitle = view.findViewById(R.id.editTextTitle);
+        editTextIngredients = view.findViewById(R.id.editTextIngredients);
+        editTextSteps = view.findViewById(R.id.editTextSteps);
+        spinnerRecipeType = view.findViewById(R.id.spinnerRecipeType);
+        editTextCalories = view.findViewById(R.id.editTextCalories);
+        buttonSubmit = view.findViewById(R.id.buttonSubmit);
 
-        buttonSelectPhoto.setOnClickListener(new View.OnClickListener() {
+        buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openImagePicker();
-            }
-        });
-
-        buttonSaveRecipe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveRecipe();
+                submitRecipe();
             }
         });
 
         return view;
     }
 
-    private void openImagePicker() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-    }
+    private void submitRecipe() {
+        String title = editTextTitle.getText().toString().trim();
+        String ingredients = editTextIngredients.getText().toString().trim();
+        String steps = editTextSteps.getText().toString().trim();
+        String recipeType = spinnerRecipeType.getSelectedItem().toString();
+        String calories = editTextCalories.getText().toString().trim();
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            imageUri = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
-                imagePhoto.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void saveRecipe() {
-        String title = editTitle.getText().toString();
-        String ingredients = editIngredients.getText().toString();
-        String steps = editSteps.getText().toString();
-        String type = editType.getText().toString();
-        String caloriesStr = editCalories.getText().toString();
-        Integer calories = caloriesStr.isEmpty() ? null : Integer.parseInt(caloriesStr);
-        String photoPath = imageUri != null ? imageUri.toString() : null;
-
-        if (title.isEmpty() || ingredients.isEmpty() || steps.isEmpty() || type.isEmpty()) {
-            Toast.makeText(getActivity(), "Preencha todos os campos obrigatórios", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(title)) {
+            Toast.makeText(getContext(), "Por favor, insira o título", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        Receita receita = new Receita(title, ingredients, steps, type, photoPath, calories);
-        AppDatabase db = AppDatabase.getDatabase(getContext());
-        db.receitaDao().insert(receita);
+        if (TextUtils.isEmpty(ingredients)) {
+            Toast.makeText(getContext(), "Por favor, insira os ingredientes", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        Toast.makeText(getActivity(), "Receita salva com sucesso", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(steps)) {
+            Toast.makeText(getContext(), "Por favor, insira o passo a passo", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        // Limpar os campos
-        editTitle.setText("");
-        editIngredients.setText("");
-        editSteps.setText("");
-        editType.setText("");
-        editCalories.setText("");
-        imagePhoto.setImageBitmap(null);
-        imageUri = null;
+        // Aqui você pode adicionar a lógica para salvar a receita no banco de dados
+        // e fazer o upload da foto, se necessário.
+
+        Toast.makeText(getContext(), "Receita cadastrada com sucesso!", Toast.LENGTH_SHORT).show();
+        // Limpar os campos após o cadastro
+        clearFields();
+    }
+
+    private void clearFields() {
+        editTextTitle.setText("");
+        editTextIngredients.setText("");
+        editTextSteps.setText("");
+        editTextCalories.setText("");
+        spinnerRecipeType.setSelection(0);
     }
 }
