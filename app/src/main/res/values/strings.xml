@@ -11,5 +11,13 @@
     <string name="escuro">Modo Escuro</string>
     <string name="claro">Modo Claro</string>
     <string name="receita">Receita</string>
+    <string name="login"> Login</string>
+    <string name="entradas"> Entradas </string>
+    <string name="principal"> Prato Principal</string>
+    <string name="sobremesas"> Sobremesas </string>
+    <string name="bebidas"> Bebidas</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

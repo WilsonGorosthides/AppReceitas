@@ -22,14 +22,27 @@ public class Receita {
     @ColumnInfo(name = "passos")
     private String steps;
 
+    @NonNull
+    @ColumnInfo(name = "tipo")
+    private String type;
+
+    @ColumnInfo(name = "foto")
+    private String photo; // Caminho da foto
+
+    @ColumnInfo(name = "calorias")
+    private Integer calories; // Calorias da receita
+
     // Construtor padrão
     public Receita() {}
 
     // Construtor completo
-    public Receita(@NonNull String title, @NonNull String ingredients, @NonNull String steps) {
+    public Receita(@NonNull String title, @NonNull String ingredients, @NonNull String steps, @NonNull String type, String photo, Integer calories) {
         this.title = title;
         this.ingredients = ingredients;
         this.steps = steps;
+        this.type = type;
+        this.photo = photo;
+        this.calories = calories;
     }
 
     // Getters e Setters
@@ -66,5 +79,30 @@ public class Receita {
 
     public void setSteps(@NonNull String steps) {
         this.steps = steps;
+    }
+
+    @NonNull
+    public String getType() {
+        return type;
+    }
+
+    public void setType(@NonNull String type) {
+        this.type = type;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public Integer getCalories() {
+        return calories;
+    }
+
+    public void setCalories(Integer calories) {
+        this.calories = calories;
     }
 }
