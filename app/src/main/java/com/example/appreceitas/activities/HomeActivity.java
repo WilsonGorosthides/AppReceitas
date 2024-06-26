@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,7 +13,10 @@ import androidx.fragment.app.Fragment;
 import com.example.appreceitas.R;
 import com.example.appreceitas.fragments.CreateRecipeFragment;
 import com.example.appreceitas.fragments.ProfileFragment;
-import com.example.appreceitas.fragments.RecipesListFragment;
+import com.example.appreceitas.fragments.RecipesListFragmentEntrada;
+import com.example.appreceitas.fragments.RecipesListFragmentPrincipal;
+import com.example.appreceitas.fragments.RecipesListFragmentSobremesa;
+import com.example.appreceitas.fragments.RecipesListFragmentBebidas;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -35,39 +37,35 @@ public class HomeActivity extends AppCompatActivity {
 
         // Set default fragment
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new RecipesListFragment("entradas")).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new RecipesListFragmentEntrada()).commit();
         }
 
-        ImageView iconEntradas = findViewById(R.id.icon_entradas);
-        ImageView iconPrincipal = findViewById(R.id.icon_principal);
-        ImageView iconSobremesas = findViewById(R.id.icon_sobremesas);
-        ImageView iconBebidas = findViewById(R.id.icon_bebidas);
-
-        iconEntradas.setOnClickListener(new View.OnClickListener() {
+        // Set click listeners for icons
+        findViewById(R.id.icon_entradas).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new RecipesListFragment("entradas")).commit();
+                replaceFragment(new RecipesListFragmentEntrada());
             }
         });
 
-        iconPrincipal.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.icon_principal).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new RecipesListFragment("principal")).commit();
+                replaceFragment(new RecipesListFragmentPrincipal());
             }
         });
 
-        iconSobremesas.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.icon_sobremesas).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new RecipesListFragment("sobremesas")).commit();
+                replaceFragment(new RecipesListFragmentSobremesa());
             }
         });
 
-        iconBebidas.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.icon_bebidas).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new RecipesListFragment("bebidas")).commit();
+                replaceFragment(new RecipesListFragmentBebidas());
             }
         });
     }
@@ -77,15 +75,16 @@ public class HomeActivity extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     Fragment selectedFragment = null;
+                    int itemId = item.getItemId();
 
-                    if (item.getItemId() == R.id.nav_create_recipe) {
+                    if (itemId == R.id.nav_create_recipe) {
                         if (isLoggedIn) {
                             selectedFragment = new CreateRecipeFragment();
                         } else {
                             showLoginPrompt();
                             return false;
                         }
-                    } else if (item.getItemId() == R.id.nav_profile) {
+                    } else if (itemId == R.id.nav_profile) {
                         if (isLoggedIn) {
                             selectedFragment = new ProfileFragment();
                         } else {
@@ -101,6 +100,10 @@ public class HomeActivity extends AppCompatActivity {
                     return true;
                 }
             };
+
+    private void replaceFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+    }
 
     private void showLoginPrompt() {
         Toast.makeText(this, "Por favor, faça login para acessar esta funcionalidade.", Toast.LENGTH_SHORT).show();
