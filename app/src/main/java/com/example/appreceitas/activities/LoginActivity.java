@@ -75,4 +75,5 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Email ou senha incorretos", Toast.LENGTH_SHORT).show();
         }
     }
+
 }

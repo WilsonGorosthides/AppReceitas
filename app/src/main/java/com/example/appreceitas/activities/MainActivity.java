@@ -52,12 +52,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void abrirLoginUserActivity() {
-        Intent intent = new Intent(this, LoginActivity.class);
+
+        Intent intent = new Intent(this,
+                LoginActivity.class);
         startActivity(intent);
     }
 
     private void abrirRegisterUserActivity() {
-        Intent intent = new Intent(this, RegisterUserActivity.class);
+
+        Intent intent = new Intent(this,
+                RegisterUserActivity.class);
+
         startActivity(intent);
     }
 }
