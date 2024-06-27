@@ -1,5 +1,6 @@
 package com.example.appreceitas.activities;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -76,4 +77,5 @@ public class RegisterUserActivity extends AppCompatActivity {
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         return Pattern.matches(emailPattern, email);
     }
+
 }

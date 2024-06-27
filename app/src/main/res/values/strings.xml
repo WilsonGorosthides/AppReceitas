@@ -16,8 +16,12 @@
     <string name="principal"> Prato Principal</string>
     <string name="sobremesas"> Sobremesas </string>
     <string name="bebidas"> Bebidas</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="calories">Calorias: %1$d</string>
+    <string-array name="recipe_types">
+        <item>Tipo de Receita</item>
+        <item>Entrada</item>
+        <item>Prato Principal</item>
+        <item>Sobremesa</item>
+        <item>Bebida</item>
+    </string-array>
 </resources>
