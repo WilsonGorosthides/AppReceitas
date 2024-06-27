@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="recycler_view_bebidas" type="id" />
+    <item name="recycler_view_entrada" type="id" />
+    <item name="recycler_view_principal" type="id" />
+    <item name="recycler_view_sobremesa" type="id" />
+</resources>
