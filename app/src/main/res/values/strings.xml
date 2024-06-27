@@ -11,5 +11,17 @@
     <string name="escuro">Modo Escuro</string>
     <string name="claro">Modo Claro</string>
     <string name="receita">Receita</string>
-
+    <string name="login"> Login</string>
+    <string name="entradas"> Entradas </string>
+    <string name="principal"> Prato Principal</string>
+    <string name="sobremesas"> Sobremesas </string>
+    <string name="bebidas"> Bebidas</string>
+    <string name="calories">Calorias: %1$d</string>
+    <string-array name="recipe_types">
+        <item>Tipo de Receita</item>
+        <item>Entrada</item>
+        <item>Prato Principal</item>
+        <item>Sobremesa</item>
+        <item>Bebida</item>
+    </string-array>
 </resources>
