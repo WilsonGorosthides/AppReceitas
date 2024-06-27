@@ -1,12 +1,14 @@
 package com.example.appreceitas.entities;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "receitas")
-public class Receita {
+public class Receita implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
@@ -27,15 +29,13 @@ public class Receita {
     private String type;
 
     @ColumnInfo(name = "foto")
-    private String photo; // Caminho da foto
+    private String photo;
 
     @ColumnInfo(name = "calorias")
-    private Integer calories; // Calorias da receita
+    private Integer calories;
 
-    // Construtor padrão
     public Receita() {}
 
-    // Construtor completo
     public Receita(@NonNull String title, @NonNull String ingredients, @NonNull String steps, @NonNull String type, String photo, Integer calories) {
         this.title = title;
         this.ingredients = ingredients;
@@ -45,7 +45,6 @@ public class Receita {
         this.calories = calories;
     }
 
-    // Getters e Setters
     public int getId() {
         return id;
     }
@@ -104,5 +103,52 @@ public class Receita {
 
     public void setCalories(Integer calories) {
         this.calories = calories;
+    }
+
+    protected Receita(Parcel in) {
+        id = in.readInt();
+        title = in.readString();
+        ingredients = in.readString();
+        steps = in.readString();
+        type = in.readString();
+        photo = in.readString();
+        if (in.readByte() == 0) {
+            calories = null;
+        } else {
+            calories = in.readInt();
+        }
+    }
+
+    public static final Creator<Receita> CREATOR = new Creator<Receita>() {
+        @Override
+        public Receita createFromParcel(Parcel in) {
+            return new Receita(in);
+        }
+
+        @Override
+        public Receita[] newArray(int size) {
+            return new Receita[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(title);
+        parcel.writeString(ingredients);
+        parcel.writeString(steps);
+        parcel.writeString(type);
+        parcel.writeString(photo);
+        if (calories == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(calories);
+        }
     }
 }

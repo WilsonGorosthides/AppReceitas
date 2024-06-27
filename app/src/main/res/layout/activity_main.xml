@@ -10,48 +10,58 @@
         android:id="@+id/btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="300dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="22dp"
         android:text="Registrar"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
-        android:layout_marginEnd="172dp"
+        android:layout_marginStart="162dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="59dp"
         android:text="Login"
+        app:layout_constraintBottom_toTopOf="@+id/btn_offline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_register" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_offline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="148dp"
+        android:layout_marginStart="139dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="302dp"
         android:text="Entrar Offline"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/txt_title"
         android:layout_width="197dp"
         android:layout_height="77dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="93dp"
+        android:layout_marginStart="122dp"
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="76dp"
         android:text="@string/app_name"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_login"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="125dp"
         android:layout_height="109dp"
-        android:layout_marginEnd="140dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="143dp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logoapp" />

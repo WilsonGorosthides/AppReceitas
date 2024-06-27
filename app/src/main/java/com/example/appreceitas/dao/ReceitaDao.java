@@ -28,7 +28,9 @@ public interface ReceitaDao {
     // Deletar todas as receitas
     @Query("DELETE FROM receitas")
     void deleteAllReceitas();
-
+    // Consultar receitas por tipo
+    @Query("SELECT * FROM receitas WHERE tipo = :type")
+    List<Receita> getRecipesByType(String type);
     // Consultar todas as receitas
     @Query("SELECT * FROM receitas")
     List<Receita> getAllReceitas();
