@@ -5,50 +5,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#E0E0E0"> <!-- Cor de fundo ajustada -->
 
     <TextView
         android:id="@+id/recipe_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_width="145dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:text="Título da Receita"
         android:textAppearance="?attr/textAppearanceHeadline6"
-        android:textSize="24sp"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/recipe_ingredients"
-        android:layout_width="172dp"
-        android:layout_height="131dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="32dp"
+        android:layout_width="169dp"
+        android:layout_height="198dp"
+        android:layout_marginTop="8dp"
         android:text="Ingredientes"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recipe_title" />
 
     <TextView
         android:id="@+id/recipe_steps"
-        android:layout_width="190dp"
-        android:layout_height="208dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="166dp"
+        android:layout_height="276dp"
+        android:layout_marginTop="8dp"
         android:text="Passos"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recipe_ingredients" />
 
     <TextView
         android:id="@+id/recipe_calories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="84dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="88dp"
         android:text="Calorias"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recipe_steps" />
 

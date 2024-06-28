@@ -1,12 +1,14 @@
 package com.example.appreceitas.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +17,7 @@ import com.example.appreceitas.adapters.RecipeAdapter;
 import com.example.appreceitas.database.AppDatabase;
 import com.example.appreceitas.entities.Receita;
 import com.example.appreceitas.fragments.RecipeDetailFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
@@ -36,14 +39,15 @@ public abstract class RecipesListActivity extends AppCompatActivity implements R
         List<Receita> receitas = db.receitaDao().getRecipesByType(getRecipeType());
         recipeAdapter = new RecipeAdapter(receitas, this);
         recyclerView.setAdapter(recipeAdapter);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
     }
 
     @Override
     public void onItemClick(Receita receita) {
-        Log.d(TAG, "Receita clicada: " + receita.getTitle());
         RecipeDetailFragment fragment = RecipeDetailFragment.newInstance(receita);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
                 .commit();
@@ -51,6 +55,26 @@ public abstract class RecipesListActivity extends AppCompatActivity implements R
         // Tornar o FrameLayout visível
         findViewById(R.id.fragment_container).setVisibility(View.VISIBLE);
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    int itemId = item.getItemId();
+
+                    if (itemId == R.id.nav_create_recipe) {
+                        startActivity(new Intent(RecipesListActivity.this, CreateRecipeActivity.class));
+                    } else if (itemId == R.id.nav_profile) {
+                        startActivity(new Intent(RecipesListActivity.this, ProfileActivity.class));
+                    } else if (itemId == R.id.nav_home) {
+                        startActivity(new Intent(RecipesListActivity.this, HomeActivity.class));
+                    } else if (itemId == R.id.nav_sair_main) {
+                        startActivity(new Intent(RecipesListActivity.this, MainActivity.class));
+                    }
+
+                    return true;
+                }
+            };
 
     protected abstract int getLayoutId();
 
