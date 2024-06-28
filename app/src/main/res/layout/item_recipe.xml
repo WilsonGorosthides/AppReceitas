@@ -15,10 +15,10 @@
 
     <TextView
         android:id="@+id/recipe_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="98dp"
+        android:layout_height="82dp"
         android:layout_marginTop="8dp"
+        android:text="Título da Receita"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:text="Título da Receita" />
+        android:textStyle="bold" />
 </LinearLayout>
