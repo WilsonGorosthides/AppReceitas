@@ -77,12 +77,18 @@ public class HomeActivity extends AppCompatActivity {
                     } else if (itemId == R.id.nav_profile) {
                         if (isLoggedIn) {
                             Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
-                            intent.putExtra("userId", userId);
+                            intent.putExtra("userId", userId); // Passar o userId
                             startActivity(intent);
                         } else {
                             showLoginPrompt();
                             return false;
                         }
+                    } else if (itemId == R.id.nav_home) {
+                        // Refresh the HomeActivity
+                        startActivity(new Intent(HomeActivity.this, HomeActivity.class));
+                    } else if (itemId == R.id.nav_sair_main) {
+                        // Navigate to MainActivity
+                        startActivity(new Intent(HomeActivity.this, MainActivity.class));
                     }
 
                     return true;

@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#E0E0E0"> <!-- Cor de fundo ajustada -->
+    android:background="#E0E0E0">
 
     <TextView
         android:id="@+id/recipe_title"
-        android:layout_width="145dp"
-        android:layout_height="96dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="20dp"
+        android:layout_width="303dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:text="Título da Receita"
         android:textAppearance="?attr/textAppearanceHeadline6"
         android:textSize="28sp"
@@ -22,9 +22,9 @@
 
     <TextView
         android:id="@+id/recipe_ingredients"
-        android:layout_width="169dp"
-        android:layout_height="198dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
         android:text="Ingredientes"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,9 +34,9 @@
 
     <TextView
         android:id="@+id/recipe_steps"
-        android:layout_width="166dp"
-        android:layout_height="276dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="176dp"
         android:text="Passos"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,8 +48,8 @@
         android:id="@+id/recipe_calories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="88dp"
+        android:layout_marginTop="324dp"
+        android:layout_marginEnd="76dp"
         android:text="Calorias"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -69,11 +69,11 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Login bem-sucedido", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             intent.putExtra("isLoggedIn", true);
+            intent.putExtra("userId", usuario.getId()); // Passar o userId
             startActivity(intent);
             finish();  // Fechar LoginActivity
         } else {
             Toast.makeText(this, "Email ou senha incorretos", Toast.LENGTH_SHORT).show();
         }
     }
-
 }

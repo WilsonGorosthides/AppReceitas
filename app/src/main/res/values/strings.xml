@@ -17,6 +17,7 @@
     <string name="sobremesas"> Sobremesas </string>
     <string name="bebidas"> Bebidas</string>
     <string name="calories">Calorias: %1$d</string>
+    <string name="scrollview_content_description">Detalhes da Receita</string>
     <string-array name="recipe_types">
         <item>Tipo de Receita</item>
         <item>Entrada</item>
