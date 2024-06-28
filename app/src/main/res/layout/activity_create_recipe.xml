@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
-
-
-        <!-- Campo Título -->
-
-    <!-- Campo Ingredientes -->
-
-    <!-- Campo Passo a Passo -->
-
-        <!-- Campo Tipo de Receita -->
 
     <EditText
         android:id="@+id/editTextTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:hint="Título"
         android:inputType="text"
         android:maxLines="1"
@@ -38,12 +28,6 @@
         android:minLines="3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTitle" />
-
-    <!-- Campo Foto (Opcional) -->
-
-    <!-- Campo Calorias (Opcional) -->
-
-    <!-- Botão para Cadastrar -->
 
     <EditText
         android:id="@+id/editTextSteps"
@@ -66,16 +50,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextSteps" />
 
-    <Button
-        android:id="@+id/buttonAddPhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="104dp"
-        android:text="Adicionar Foto"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCalories" />
-
     <EditText
         android:id="@+id/editTextCalories"
         android:layout_width="match_parent"
@@ -88,14 +62,30 @@
         app:layout_constraintTop_toBottomOf="@+id/spinnerRecipeType" />
 
     <Button
-        android:id="@+id/buttonSubmit"
-        android:layout_width="match_parent"
+        android:id="@+id/buttonAddPhoto"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="23dp"
-        android:text="Cadastrar Receita"
+        android:layout_marginTop="16dp"
+        android:text="Adicionar Foto"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCalories"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewPhoto"
+        android:layout_width="390dp"
+        android:layout_height="106dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Foto da Receita"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonAddPhoto" />
 
-
+    <Button
+        android:id="@+id/buttonSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Cadastrar Receita"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewPhoto" />
 </androidx.constraintlayout.widget.ConstraintLayout>

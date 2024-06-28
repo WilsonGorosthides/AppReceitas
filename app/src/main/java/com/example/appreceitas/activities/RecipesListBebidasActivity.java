@@ -6,11 +6,12 @@ public class RecipesListBebidasActivity extends RecipesListActivity {
 
     @Override
     protected int getLayoutId() {
+
         return R.layout.activity_recipes_list_bebidas;
     }
 
     @Override
     protected String getRecipeType() {
-        return "Bebidas";
+        return "Bebida";
     }
 }
