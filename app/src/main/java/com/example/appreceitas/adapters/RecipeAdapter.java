@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,14 +21,22 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
     private List<Receita> receitas;
     private OnItemClickListener listener;
+    private OnDeleteClickListener deleteListener;
+    private boolean isLoggedIn; // Variável para verificar se o usuário está logado
 
     public interface OnItemClickListener {
         void onItemClick(Receita receita);
     }
 
-    public RecipeAdapter(List<Receita> receitas, OnItemClickListener listener) {
+    public interface OnDeleteClickListener {
+        void onDeleteClick(Receita receita);
+    }
+
+    public RecipeAdapter(List<Receita> receitas, OnItemClickListener listener, OnDeleteClickListener deleteListener, boolean isLoggedIn) {
         this.receitas = receitas;
         this.listener = listener;
+        this.deleteListener = deleteListener;
+        this.isLoggedIn = isLoggedIn;
     }
 
     @NonNull
@@ -40,7 +49,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Receita receita = receitas.get(position);
-        holder.bind(receita, listener);
+        holder.bind(receita, listener, deleteListener, isLoggedIn);
     }
 
     @Override
@@ -51,14 +60,16 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView title;
         private ImageView recipeImage;
+        private ImageButton deleteButton;
 
         ViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.recipe_title);
             recipeImage = itemView.findViewById(R.id.recipe_image);
+            deleteButton = itemView.findViewById(R.id.delete_button);
         }
 
-        void bind(final Receita receita, final OnItemClickListener listener) {
+        void bind(final Receita receita, final OnItemClickListener listener, final OnDeleteClickListener deleteListener, boolean isLoggedIn) {
             title.setText(receita.getTitle());
 
             // Carregar a imagem da receita se disponível
@@ -75,6 +86,18 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                     listener.onItemClick(receita);
                 }
             });
+
+            if (isLoggedIn) {
+                deleteButton.setVisibility(View.VISIBLE);
+                deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleteListener.onDeleteClick(receita);
+                    }
+                });
+            } else {
+                deleteButton.setVisibility(View.GONE);
+            }
         }
     }
 }
