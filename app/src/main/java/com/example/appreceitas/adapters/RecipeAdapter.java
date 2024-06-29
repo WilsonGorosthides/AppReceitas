@@ -22,6 +22,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     private List<Receita> receitas;
     private OnItemClickListener listener;
     private OnDeleteClickListener deleteListener;
+    private boolean isLoggedIn; // Variável para verificar se o usuário está logado
 
     public interface OnItemClickListener {
         void onItemClick(Receita receita);
@@ -31,10 +32,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         void onDeleteClick(Receita receita);
     }
 
-    public RecipeAdapter(List<Receita> receitas, OnItemClickListener listener, OnDeleteClickListener deleteListener) {
+    public RecipeAdapter(List<Receita> receitas, OnItemClickListener listener, OnDeleteClickListener deleteListener, boolean isLoggedIn) {
         this.receitas = receitas;
         this.listener = listener;
         this.deleteListener = deleteListener;
+        this.isLoggedIn = isLoggedIn;
     }
 
     @NonNull
@@ -47,7 +49,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Receita receita = receitas.get(position);
-        holder.bind(receita, listener, deleteListener);
+        holder.bind(receita, listener, deleteListener, isLoggedIn);
     }
 
     @Override
@@ -67,7 +69,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             deleteButton = itemView.findViewById(R.id.delete_button);
         }
 
-        void bind(final Receita receita, final OnItemClickListener listener, final OnDeleteClickListener deleteListener) {
+        void bind(final Receita receita, final OnItemClickListener listener, final OnDeleteClickListener deleteListener, boolean isLoggedIn) {
             title.setText(receita.getTitle());
 
             // Carregar a imagem da receita se disponível
@@ -85,12 +87,17 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                 }
             });
 
-            deleteButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    deleteListener.onDeleteClick(receita);
-                }
-            });
+            if (isLoggedIn) {
+                deleteButton.setVisibility(View.VISIBLE);
+                deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleteListener.onDeleteClick(receita);
+                    }
+                });
+            } else {
+                deleteButton.setVisibility(View.GONE);
+            }
         }
     }
 }

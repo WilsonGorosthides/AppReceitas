@@ -31,13 +31,13 @@
 
     <EditText
         android:id="@+id/editTextSteps"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="372dp"
+        android:layout_height="109dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:hint="Passo a Passo"
         android:inputType="textMultiLine"
-        android:minLines="5"
+        android:minLines="3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextIngredients" />
 
