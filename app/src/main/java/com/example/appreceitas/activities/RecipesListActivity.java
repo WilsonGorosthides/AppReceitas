@@ -21,7 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
-public abstract class RecipesListActivity extends AppCompatActivity implements RecipeAdapter.OnItemClickListener {
+public abstract class RecipesListActivity extends AppCompatActivity implements RecipeAdapter.OnItemClickListener, RecipeAdapter.OnDeleteClickListener {
     private static final String TAG = "RecipesListActivity";
 
     protected RecyclerView recyclerView;
@@ -37,7 +37,7 @@ public abstract class RecipesListActivity extends AppCompatActivity implements R
 
         AppDatabase db = AppDatabase.getDatabase(this);
         List<Receita> receitas = db.receitaDao().getRecipesByType(getRecipeType());
-        recipeAdapter = new RecipeAdapter(receitas, this);
+        recipeAdapter = new RecipeAdapter(receitas, this, this);
         recyclerView.setAdapter(recipeAdapter);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -54,6 +54,19 @@ public abstract class RecipesListActivity extends AppCompatActivity implements R
 
         // Tornar o FrameLayout visível
         findViewById(R.id.fragment_container).setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onDeleteClick(Receita receita) {
+        AppDatabase db = AppDatabase.getDatabase(this);
+        db.receitaDao().delete(receita);
+
+        // Atualizar a lista de receitas
+        List<Receita> receitas = db.receitaDao().getRecipesByType(getRecipeType());
+        recipeAdapter = new RecipeAdapter(receitas, this, this);
+        recyclerView.setAdapter(recipeAdapter);
+
+        Toast.makeText(this, "Receita excluída", Toast.LENGTH_SHORT).show();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =

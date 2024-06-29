@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,14 +21,20 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
     private List<Receita> receitas;
     private OnItemClickListener listener;
+    private OnDeleteClickListener deleteListener;
 
     public interface OnItemClickListener {
         void onItemClick(Receita receita);
     }
 
-    public RecipeAdapter(List<Receita> receitas, OnItemClickListener listener) {
+    public interface OnDeleteClickListener {
+        void onDeleteClick(Receita receita);
+    }
+
+    public RecipeAdapter(List<Receita> receitas, OnItemClickListener listener, OnDeleteClickListener deleteListener) {
         this.receitas = receitas;
         this.listener = listener;
+        this.deleteListener = deleteListener;
     }
 
     @NonNull
@@ -40,7 +47,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Receita receita = receitas.get(position);
-        holder.bind(receita, listener);
+        holder.bind(receita, listener, deleteListener);
     }
 
     @Override
@@ -51,14 +58,16 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView title;
         private ImageView recipeImage;
+        private ImageButton deleteButton;
 
         ViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.recipe_title);
             recipeImage = itemView.findViewById(R.id.recipe_image);
+            deleteButton = itemView.findViewById(R.id.delete_button);
         }
 
-        void bind(final Receita receita, final OnItemClickListener listener) {
+        void bind(final Receita receita, final OnItemClickListener listener, final OnDeleteClickListener deleteListener) {
             title.setText(receita.getTitle());
 
             // Carregar a imagem da receita se disponível
@@ -73,6 +82,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                 @Override
                 public void onClick(View v) {
                     listener.onItemClick(receita);
+                }
+            });
+
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    deleteListener.onDeleteClick(receita);
                 }
             });
         }
